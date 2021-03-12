@@ -21,4 +21,7 @@ module.exports = function(config) {
   config.resolve.alias.react = 'preact/compat';
   config.resolve.alias['react-dom/test-utils'] = 'preact/test-utils';
   config.resolve.alias['react-dom'] = 'preact/compat';
+  
+  config.resolveLoader.modules.shift();
+  config.resolve.modules.pop();
 };

@@ -28,5 +28,9 @@
   {
     "key": "bluetooth",
     "img": "/assets/integrations/cover/bluetooth.jpg"
+  },
+  {
+    "key": "insteon",
+    "img": "/assets/integrations/cover/insteon.jpg"
   }
 ]

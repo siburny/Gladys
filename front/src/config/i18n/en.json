@@ -252,6 +252,11 @@
       "apiKey": "Telegram Bot API Key",
       "saveButton": "Save"
     },
+    "insteon": {
+      "title": "Insteon",
+      "description": "Control Insteon devices.",
+      "setupTab": "Setup Gateway"
+    },
     "philipsHue": {
       "title": "Philips Hue",
       "description": "Control Philips Hue Lights.",
