@@ -28,12 +28,12 @@ const SERVICE_STATUS = {
   RUNNING: 'RUNNING',
   STOPPED: 'STOPPED',
   ERROR: 'ERROR',
-  NOT_CONFIGURED: 'NOT_CONFIGURED',
 };
 
 const SYSTEM_VARIABLE_NAMES = {
   DEVICE_STATE_HISTORY_IN_DAYS: 'DEVICE_STATE_HISTORY_IN_DAYS',
   GLADYS_GATEWAY_BACKUP_KEY: 'GLADYS_GATEWAY_BACKUP_KEY',
+  GLADYS_GATEWAY_USERS_KEYS: 'GLADYS_GATEWAY_USERS_KEYS',
   TIMEZONE: 'TIMEZONE',
 };
 
@@ -54,6 +54,7 @@ const EVENTS = {
     RESTORE_BACKUP: 'gateway.restore-backup',
     NEW_MESSAGE_API_CALL: 'gateway.new-message-api-call',
     NEW_MESSAGE_OWNTRACKS_LOCATION: 'gateway.new-message-owntracks-location',
+    USER_KEYS_CHANGED: 'gateway.user-keys-changed',
   },
   USER_SLEEP: {
     TIME_TO_WAKE_UP: 'user.time-to-wake-up',
@@ -215,6 +216,14 @@ const ACTIONS = {
   CONDITION: {
     ONLY_CONTINUE_IF: 'condition.only-continue-if',
   },
+  USER: {
+    SET_SEEN_AT_HOME: 'user.set-seen-at-home',
+    SET_OUT_OF_HOME: 'user.set-out-of-home',
+    CHECK_PRESENCE: 'user.check-presence',
+  },
+  HTTP: {
+    REQUEST: 'http.request',
+  },
 };
 
 const INTENTS = {
@@ -248,10 +257,12 @@ const DEVICE_FEATURE_CATEGORIES = {
   CO2_SENSOR: 'co2-sensor',
   COUNTER_SENSOR: 'counter-sensor',
   LEAK_SENSOR: 'leak-sensor',
+  PRESENCE_SENSOR: 'presence-sensor',
+  DISTANCE_SENSOR: 'distance-sensor',
   CAMERA: 'camera',
   SWITCH: 'switch',
   SIREN: 'siren',
-  ACCESS_CONTROl: 'access-control',
+  ACCESS_CONTROL: 'access-control',
   CUBE: 'cube',
   BUTTON: 'button',
   UNKNOWN: 'unknown',
@@ -330,6 +341,18 @@ const DEVICE_FEATURE_UNITS = {
   AMPERE: 'ampere',
   VOLT: 'volt',
   PPM: 'ppm',
+  MM: 'mm',
+  CM: 'cm',
+};
+
+const DEVICE_FEATURE_UNITS_BY_CATEGORY = {
+  [DEVICE_FEATURE_CATEGORIES.BATTERY]: [DEVICE_FEATURE_UNITS.PERCENT],
+  [DEVICE_FEATURE_CATEGORIES.CO2_SENSOR]: [DEVICE_FEATURE_UNITS.PPM],
+  [DEVICE_FEATURE_CATEGORIES.DISTANCE_SENSOR]: [DEVICE_FEATURE_UNITS.MM, DEVICE_FEATURE_UNITS.CM],
+  [DEVICE_FEATURE_CATEGORIES.HUMIDITY_SENSOR]: [DEVICE_FEATURE_UNITS.PERCENT],
+  [DEVICE_FEATURE_CATEGORIES.LIGHT_SENSOR]: [DEVICE_FEATURE_UNITS.LUX],
+  [DEVICE_FEATURE_CATEGORIES.PRESSURE_SENSOR]: [DEVICE_FEATURE_UNITS.PASCAL],
+  [DEVICE_FEATURE_CATEGORIES.TEMPERATURE_SENSOR]: [DEVICE_FEATURE_UNITS.CELSIUS, DEVICE_FEATURE_UNITS.FAHRENHEIT],
 };
 
 const ACTIONS_STATUS = {
@@ -401,6 +424,11 @@ const WEBSOCKET_MESSAGE_TYPES = {
   BLUETOOTH: {
     STATE: 'bluetooth.status',
     DISCOVER: 'bluetooth.discover',
+  },
+  EWELINK: {
+    CONNECTED: 'ewelink.connected',
+    NEW_DEVICE: 'ewelink.new-device',
+    ERROR: 'ewelink.error',
   },
 };
 
@@ -483,6 +511,8 @@ module.exports.WEBSOCKET_MESSAGE_TYPES = WEBSOCKET_MESSAGE_TYPES;
 
 module.exports.DEVICE_FEATURE_UNITS = DEVICE_FEATURE_UNITS;
 module.exports.DEVICE_FEATURE_UNITS_LIST = DEVICE_FEATURE_UNITS_LIST;
+
+module.exports.DEVICE_FEATURE_UNITS_BY_CATEGORY = DEVICE_FEATURE_UNITS_BY_CATEGORY;
 
 module.exports.SERVICE_STATUS = SERVICE_STATUS;
 module.exports.SERVICE_STATUS_LIST = createList(SERVICE_STATUS);

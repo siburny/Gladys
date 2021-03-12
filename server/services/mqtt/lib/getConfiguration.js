@@ -17,14 +17,18 @@ async function getConfiguration() {
 
   let useEmbeddedBroker = false;
   let networkModeValid = false;
+  let mosquittoVersion = null;
 
   // Look for broker docker image
   if (dockerBased) {
     networkModeValid = await this.checkDockerNetwork();
 
-    useEmbeddedBroker = await this.gladys.variable.getValue(CONFIGURATION.MQTT_EMBEDDED_BROKER_KEY, this.serviceId);
-    // Force boolean value
-    useEmbeddedBroker = networkModeValid && (!!useEmbeddedBroker || !mqttUrl);
+    const useEmbeddedBrokerVariable = await this.gladys.variable.getValue(
+      CONFIGURATION.MQTT_EMBEDDED_BROKER_KEY,
+      this.serviceId,
+    );
+    // Boolean stored as integer, we need to check it
+    useEmbeddedBroker = networkModeValid && useEmbeddedBrokerVariable !== '0';
 
     const dockerImages = await this.gladys.system.getContainers({
       all: true,
@@ -33,6 +37,8 @@ async function getConfiguration() {
       },
     });
     brokerContainerAvailable = dockerImages.length > 0;
+
+    mosquittoVersion = await this.gladys.variable.getValue(CONFIGURATION.MQTT_MOSQUITTO_VERSION, this.serviceId);
   }
 
   return {
@@ -43,6 +49,7 @@ async function getConfiguration() {
     dockerBased,
     brokerContainerAvailable,
     networkModeValid,
+    mosquittoVersion,
   };
 }
 

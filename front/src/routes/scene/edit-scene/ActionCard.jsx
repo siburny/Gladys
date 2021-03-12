@@ -1,5 +1,7 @@
 import { h } from 'preact';
 import { Text } from 'preact-i18n';
+import cx from 'classnames';
+
 import { ACTIONS } from '../../../../../server/utils/constants';
 
 // Actions cards
@@ -10,6 +12,9 @@ import SendMessageParams from './actions/SendMessageParams';
 import OnlyContinueIfParams from './actions/only-continue-if/OnlyContinueIfParams';
 import TurnOnOffLightParams from './actions/TurnOnOffLightParams';
 import TurnOnOffSwitchParams from './actions/TurnOnOffSwitchParams';
+import UserPresence from './actions/UserPresence';
+import HttpRequest from './actions/HttpRequest';
+import CheckUserPresence from './actions/CheckUserPresence';
 
 const deleteActionFromColumn = (columnIndex, rowIndex, deleteAction) => () => {
   deleteAction(columnIndex, rowIndex);
@@ -23,11 +28,21 @@ const ACTION_ICON = {
   [ACTIONS.TIME.DELAY]: 'fe fe-clock',
   [ACTIONS.MESSAGE.SEND]: 'fe fe-message-square',
   [ACTIONS.CONDITION.ONLY_CONTINUE_IF]: 'fe fe-shuffle',
-  [ACTIONS.DEVICE.GET_VALUE]: 'fe fe-refresh-cw'
+  [ACTIONS.DEVICE.GET_VALUE]: 'fe fe-refresh-cw',
+  [ACTIONS.USER.SET_SEEN_AT_HOME]: 'fe fe-home',
+  [ACTIONS.USER.SET_OUT_OF_HOME]: 'fe fe-home',
+  [ACTIONS.HTTP.REQUEST]: 'fe fe-link',
+  [ACTIONS.USER.CHECK_PRESENCE]: 'fe fe-home'
 };
 
 const ActionCard = ({ children, ...props }) => (
-  <div class={props.action.type === ACTIONS.CONDITION.ONLY_CONTINUE_IF ? 'col-lg-12' : 'col-lg-4'}>
+  <div
+    class={cx({
+      'col-lg-12': props.action.type === ACTIONS.CONDITION.ONLY_CONTINUE_IF,
+      'col-lg-6': props.action.type === ACTIONS.MESSAGE.SEND,
+      'col-lg-4': props.action.type !== ACTIONS.CONDITION.ONLY_CONTINUE_IF && props.action.type !== ACTIONS.MESSAGE.SEND
+    })}
+  >
     <div class="card">
       <div class="card-header">
         {props.action.type !== null && <i class={ACTION_ICON[props.action.type]} />}
@@ -113,6 +128,8 @@ const ActionCard = ({ children, ...props }) => (
             columnIndex={props.columnIndex}
             index={props.index}
             updateActionProperty={props.updateActionProperty}
+            actionsGroupsBefore={props.actionsGroupsBefore}
+            variables={props.variables}
           />
         )}
         {props.action.type === ACTIONS.CONDITION.ONLY_CONTINUE_IF && (
@@ -134,6 +151,38 @@ const ActionCard = ({ children, ...props }) => (
             updateActionProperty={props.updateActionProperty}
             variables={props.variables}
             setVariables={props.setVariables}
+          />
+        )}
+        {props.action.type === ACTIONS.USER.SET_SEEN_AT_HOME && (
+          <UserPresence
+            action={props.action}
+            columnIndex={props.columnIndex}
+            index={props.index}
+            updateActionProperty={props.updateActionProperty}
+          />
+        )}
+        {props.action.type === ACTIONS.USER.CHECK_PRESENCE && (
+          <CheckUserPresence
+            action={props.action}
+            columnIndex={props.columnIndex}
+            index={props.index}
+            updateActionProperty={props.updateActionProperty}
+          />
+        )}
+        {props.action.type === ACTIONS.USER.SET_OUT_OF_HOME && (
+          <UserPresence
+            action={props.action}
+            columnIndex={props.columnIndex}
+            index={props.index}
+            updateActionProperty={props.updateActionProperty}
+          />
+        )}
+        {props.action.type === ACTIONS.HTTP.REQUEST && (
+          <HttpRequest
+            action={props.action}
+            columnIndex={props.columnIndex}
+            index={props.index}
+            updateActionProperty={props.updateActionProperty}
           />
         )}
       </div>
