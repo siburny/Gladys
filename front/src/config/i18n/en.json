@@ -255,7 +255,17 @@
     "insteon": {
       "title": "Insteon",
       "description": "Control Insteon devices.",
-      "setupTab": "Setup Gateway"
+      "setupTab": "Setup Gateway",
+      "setup": {
+        "title": "Insteon Gateway Settings",
+        "description": "To use Insteon in Gladys, you need to have an Insteon USB Gateway connected to your Gladys instance.",
+        "usbDriverPathLabel": "Select the USB port where your Insteon USB Gateway is connected",
+        "connectButton": "Connect",
+        "disconnectButton": "Disconnect",
+        "refreshButton": "Refresh USB list",
+        "notConnected": "Gladys is not connected to any Z-Wave USB stick.",
+        "connectedWithSuccess": "Z-Wave USB stick connected with success."
+      }
     },
     "philipsHue": {
       "title": "Philips Hue",

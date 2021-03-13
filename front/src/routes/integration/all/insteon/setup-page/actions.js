@@ -1,8 +1,6 @@
 import update from 'immutability-helper';
 import get from 'get-value';
-import {
-  RequestStatus
-} from '../../../../../utils/consts';
+import { RequestStatus } from '../../../../../utils/consts';
 
 const actions = store => ({
   async load(state) {
@@ -29,13 +27,12 @@ const actions = store => ({
   async updateSerialPort(state, e) {
     try {
       await state.httpClient.post('/api/v1/service/insteon/setPort', {
-        'serialPort': e.target.value
+        serialPort: e.target.value
       });
 
       store.setState({
-        serialPortStatus: e.target.value
+        insteonSerialPort: e.target.value
       });
-
     } catch (e) {
       store.setState({
         serialPortStatus: RequestStatus.Error,
@@ -45,9 +42,9 @@ const actions = store => ({
   },
 
   async connect(state, portPath) {
-    store.setState({
-      philipsHueGetDevicesStatus: RequestStatus.Getting
-    });
+    if (!portPath) {
+      return;
+    }
     try {
       const insteonGateway = await state.httpClient.post('/api/v1/service/insteon/connect', {
         portPath
@@ -56,21 +53,16 @@ const actions = store => ({
       await state.httpClient.post('/api/v1/device', insteonGateway);
 
       store.setState({
-        insteonGateway,
-        philipsHueGetDevicesStatus: RequestStatus.Success
+        insteonGateway
       });
     } catch (e) {
       store.setState({
-        philipsHueGetDevicesStatus: RequestStatus.Error,
-        philipsHueGetDevicesError: e.message
+        zwaveConnectionInProgress: true
       });
     }
   },
 
   async disconnect(state) {
-    store.setState({
-      philipsHueGetDevicesStatus: RequestStatus.Getting
-    });
     try {
       let insteonGateway = state.insteonGateway;
 
@@ -89,6 +81,13 @@ const actions = store => ({
         philipsHueGetDevicesError: e.message
       });
     }
+  },
+
+  async getInsteonGateway(state) {
+    const insteonGateway = await state.httpClient.get('/api/v1/service/insteon/getGateway');
+    store.setState({
+      insteonGateway
+    });
   }
 });
 

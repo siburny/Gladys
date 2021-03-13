@@ -1,4 +1,3 @@
-const { Insteon } = require('home-controller');
 const logger = require('../../utils/logger');
 
 const InsteonGatewayHandler = require('./lib/');

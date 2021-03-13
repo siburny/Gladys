@@ -4,8 +4,12 @@
  * connect('COM1');
  */
 async function disconnect() {
-  if(this.insteonGateway) {
-    await this.gladys.device.destroy(this.insteonGateway.selector);
+  try {
+    if (this.insteonGateway) {
+      await this.gladys.device.destroy(this.insteonGateway.selector);
+    }
+  } finally {
+    delete this.insteonGateway;
   }
 
   if (this.gw) {

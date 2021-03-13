@@ -9,7 +9,7 @@ const PhilipsHuePage = ({ children, ...props }) => (
           <div class="row">
             <div class="col-lg-3">
               <h3 class="page-title mb-5">
-                <Text id="integration.philipsHue.title" />
+                <Text id="integration.insteon.title" />
               </h3>
               <div>
                 <div class="list-group list-group-transparent mb-0">
@@ -21,7 +21,7 @@ const PhilipsHuePage = ({ children, ...props }) => (
                     <span class="icon mr-3">
                       <i class="fe fe-sliders" />
                     </span>
-                    <Text id="integration.philipsHue.setupTab" />
+                    <Text id="integration.insteon.setupTab" />
                   </Link>
 
                   <Link

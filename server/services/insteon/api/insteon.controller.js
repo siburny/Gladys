@@ -54,6 +54,15 @@ module.exports = function InsteonController(insteonGatewayHandler) {
   }
 
   /**
+   * @api {get} /api/v1/service/insteon/getGateway Get gateway info
+   * @apiName CheckPort
+   * @apiGroup Insteon
+   */
+  async function getGateway(req, res) {
+    res.json(insteonGatewayHandler.insteonGateway);
+  }
+
+  /**
    * @api {get} /api/v1/service/philips-hue/light Get lights
    * @apiName GetLights
    * @apiGroup PhilipsHue
@@ -105,6 +114,10 @@ module.exports = function InsteonController(insteonGatewayHandler) {
     'post /api/v1/service/insteon/disconnect': {
       authenticated: true,
       controller: asyncMiddleware(disconnect),
+    },
+    'get /api/v1/service/insteon/getGateway': {
+      authenticated: true,
+      controller: asyncMiddleware(getGateway),
     },
     'get /api/v1/service/insteon/light': {
       authenticated: true,

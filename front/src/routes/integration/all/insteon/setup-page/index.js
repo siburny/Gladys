@@ -5,14 +5,14 @@ import InsteonPage from '../InsteonPage';
 import SetupTab from './SetupTab';
 
 @connect(
-  'user,serialPorts,insteonSerialPort,philipsHueGetDevicesStatus,insteonGatewayStatus,philipsHueGetBridgesStatus,philipsHueDeleteDeviceStatus',
+  'user,serialPorts,insteonSerialPort,insteonGateway',
   actions
 )
 class InsteonSetupPage extends Component {
   componentWillMount() {
     this.props.load();
     this.props.getPorts();
-    //this.props.getInsteonGateway();
+    this.props.getInsteonGateway();
   }
 
   render(props, {}) {
