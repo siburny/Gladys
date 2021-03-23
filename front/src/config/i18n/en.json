@@ -265,6 +265,11 @@
         "refreshButton": "Refresh USB list",
         "notConnected": "Gladys is not connected to any Z-Wave USB stick.",
         "connectedWithSuccess": "Z-Wave USB stick connected with success."
+      },
+      "device": {
+        "saveButton": "Save",
+        "deleteButton": "Delete",
+        "beepButton": "Beep"
       }
     },
     "philipsHue": {

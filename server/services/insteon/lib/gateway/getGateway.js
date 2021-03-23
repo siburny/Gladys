@@ -1,9 +1,4 @@
-const {
-  Insteon
-} = require('home-controller');
-const {
-  InsteonGateway
-} = require('./models/gateway');
+const { InsteonGateway } = require('../models/gateway');
 
 /**
  * @description Return Philips hue bridges.
@@ -12,7 +7,7 @@ const {
  * connect('COM1');
  */
 async function getGateway() {
-  if(this.gw) {
+  if (this.gw) {
     const info = await this.gw.info();
     return InsteonGateway(info, this.serviceId, this.gw.comName);
   }

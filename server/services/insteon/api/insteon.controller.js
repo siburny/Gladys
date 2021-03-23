@@ -54,6 +54,16 @@ module.exports = function InsteonController(insteonGatewayHandler) {
   }
 
   /**
+   * @api {get} /api/v1/service/insteon/getDevices Get all devices
+   * @apiName getDevices
+   * @apiGroup Insteon
+   */
+  async function getDevices(req, res) {
+    const devices = await insteonGatewayHandler.getDevices();
+    res.json(devices);
+  }
+
+  /**
    * @api {get} /api/v1/service/insteon/getGateway Get gateway info
    * @apiName CheckPort
    * @apiGroup Insteon
@@ -114,6 +124,10 @@ module.exports = function InsteonController(insteonGatewayHandler) {
     'post /api/v1/service/insteon/disconnect': {
       authenticated: true,
       controller: asyncMiddleware(disconnect),
+    },
+    'get /api/v1/service/insteon/devices': {
+      authenticated: true,
+      controller: asyncMiddleware(getDevices),
     },
     'get /api/v1/service/insteon/getGateway': {
       authenticated: true,

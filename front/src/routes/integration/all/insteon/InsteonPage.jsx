@@ -1,7 +1,7 @@
 import { Text } from 'preact-i18n';
 import { Link } from 'preact-router/match';
 
-const PhilipsHuePage = ({ children, ...props }) => (
+const InsteonPage = ({ children, ...props }) => (
   <div class="page">
     <div class="page-main">
       <div class="my-3 my-md-5">
@@ -46,4 +46,4 @@ const PhilipsHuePage = ({ children, ...props }) => (
   </div>
 );
 
-export default PhilipsHuePage;
+export default InsteonPage;

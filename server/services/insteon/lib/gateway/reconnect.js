@@ -1,4 +1,5 @@
-const { INSTEON_SERIAL_PORT } = require('./utils/const');
+const logger = require('../../../../utils/logger');
+const { INSTEON_SERIAL_PORT } = require('../utils/const');
 
 /**
  * @description Return Philips hue bridges.
@@ -15,7 +16,7 @@ async function reconnect() {
   if (gw.length === 1) {
     const serialPort = gw[0].params.find((param) => param.name === INSTEON_SERIAL_PORT);
     if (serialPort) {
-      
+      logger.info(`Reconnecting to ${serialPort.value}`); 
       return this.connect(serialPort.value);
     }
   }

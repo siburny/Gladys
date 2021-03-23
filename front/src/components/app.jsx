@@ -73,6 +73,7 @@ import RtspCameraPage from '../routes/integration/all/rtsp-camera';
 import XiaomiPage from '../routes/integration/all/xiaomi';
 import EditXiaomiPage from '../routes/integration/all/xiaomi/edit-page';
 import InsteonSetupPage from '../routes/integration/all/insteon/setup-page';
+import InsteonDevicePage from '../routes/integration/all/insteon/device-page';
 
 // MQTT integration
 import MqttDevicePage from '../routes/integration/all/mqtt/device-page';
@@ -204,6 +205,7 @@ const AppRouter = connect(
         <EweLinkSetupPage path="/dashboard/integration/device/ewelink/setup" />
         <Redirect path="/dashboard/integration/device/insteon" to="/dashboard/integration/device/insteon/setup" />
         <InsteonSetupPage path="/dashboard/integration/device/insteon/setup" />
+        <InsteonDevicePage path="/dashboard/integration/device/insteon/devices" />
 
         <BluetoothDevicePage path="/dashboard/integration/device/bluetooth" />
         <BluetoothEditDevicePage path="/dashboard/integration/device/bluetooth/:deviceSelector" />

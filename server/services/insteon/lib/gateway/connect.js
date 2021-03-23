@@ -3,7 +3,7 @@ const {
 } = require('home-controller');
 const {
   InsteonGateway
-} = require('./models/gateway');
+} = require('../models/gateway');
 
 /**
  * @description Return Philips hue bridges.
