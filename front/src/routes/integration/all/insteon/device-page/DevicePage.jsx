@@ -52,6 +52,7 @@ const DeviceTab = ({ children, ...props }) => (
                   deviceIndex={index}
                   houses={props.houses}
                   updateDeviceProperty={props.updateDeviceProperty}
+                  beepDevice={props.beepDevice}
                   saveDevice={props.saveDevice}
                   deleteDevice={props.deleteDevice}
                 />

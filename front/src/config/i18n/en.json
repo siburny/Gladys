@@ -267,6 +267,7 @@
         "connectedWithSuccess": "Z-Wave USB stick connected with success."
       },
       "device": {
+        "createButton": "Create",
         "saveButton": "Save",
         "deleteButton": "Delete",
         "beepButton": "Beep"

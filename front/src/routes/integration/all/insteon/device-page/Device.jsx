@@ -8,8 +8,7 @@ class InsteonDeviceBox extends Component {
   beepDevice = async () => {
     this.setState({ loading: true });
     try {
-      //await this.props.saveDevice(this.props.device, this.props.deviceIndex);
-    
+      await this.props.beepDevice(this.props.device.external_id);
     } catch (e) {
       this.setState({ error: RequestStatus.Error });
     }
@@ -52,12 +51,21 @@ class InsteonDeviceBox extends Component {
                 <DeviceForm {...props} />
 
                 <div class="form-group">
-                  <button onClick={this.saveDevice} class="btn btn-success mr-2">
-                    <Text id="integration.insteon.device.saveButton" />
-                  </button>
-                  <button onClick={this.deleteDevice} class="btn btn-danger mr-2">
-                    <Text id="integration.insteon.device.deleteButton" />
-                  </button>
+                  {!props.device.id && (
+                    <button onClick={this.saveDevice} class="btn btn-success mr-2">
+                      <Text id="integration.insteon.device.createButton" />
+                    </button>
+                  )}
+                  {props.device.id && (
+                    <button onClick={this.saveDevice} class="btn btn-success mr-2">
+                      <Text id="integration.insteon.device.saveButton" />
+                    </button>
+                  )}
+                  {props.device.id && (
+                    <button onClick={this.deleteDevice} class="btn btn-danger mr-2">
+                      <Text id="integration.insteon.device.deleteButton" />
+                    </button>
+                  )}
                   <button onClick={this.beepDevice} class="btn btn-info float-right">
                     <Text id="integration.insteon.device.beepButton" />
                   </button>

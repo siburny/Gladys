@@ -33,7 +33,7 @@ module.exports = function InsteonService(gladys, serviceId) {
   return Object.freeze({
     start,
     stop,
-    device: () => {}, // philipsHueLightHandler,
+    device: insteonGatewayHandler,
     controllers: InsteonController(insteonGatewayHandler),
   });
 };

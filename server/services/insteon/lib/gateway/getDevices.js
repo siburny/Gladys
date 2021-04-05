@@ -1,4 +1,3 @@
-const { BRIDGE_EXTERNAL_ID_BASE } = require('../../../philips-hue/lib/utils/consts');
 const { InsteonLight } = require('../models/light');
 
 /**
@@ -13,15 +12,24 @@ async function getDevices() {
     const links = await this.gw.links();
 
     const toReturn = await Promise.all(
-      links.map(async link => {
-        return that.gw.info(link.id).then(info => {
-          switch (info.deviceCategory.id) {
-            case 1:
-              return InsteonLight(info, that.serviceId);
-            default:
-          }
-        });
-      })
+      links.map(async (link) => {
+        return that.gw
+          .info(link.id)
+          .then((info) => {
+            switch (info.deviceCategory.id) {
+              case 1: {
+                return InsteonLight(info, that.serviceId);
+              }
+              default: {
+                return null;
+              }
+            }
+          })
+          .then(async (device) => {
+            const deviceDb = await that.gladys.stateManager.get('device', device.selector);
+            return deviceDb || device;
+          });
+      }),
     );
 
     // await new Promise(r => setTimeout(r, 5000));

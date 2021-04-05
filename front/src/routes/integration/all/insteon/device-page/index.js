@@ -6,15 +6,15 @@ import DevicePage from './DevicePage';
 //import FoundDevices from './FoundDevices';
 
 @connect(
-  'session,user,insteonDevices,houses,getInsteonDevicesStatus,philipsHueNewDevices,getPhilipsHueCreateDeviceStatus,getPhilipsHueNewDevicesStatus',
+  'session,user,insteonDevices,insteonDevicesMap,houses,getInsteonDevicesStatus',
   actions
 )
 class InsteonDevicePage extends Component {
   componentWillMount() {
     this.props.getInsteonDevices();
-    //this.props.getHouses();
+    this.props.getHouses();
     //this.props.getPhilipsHueNewDevices();
-    this.props.getIntegrationByName('insteon');
+    //this.props.getIntegrationByName('insteon');
   }
 
   render(props, {}) {

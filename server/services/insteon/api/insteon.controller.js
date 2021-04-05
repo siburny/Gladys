@@ -28,7 +28,7 @@ module.exports = function InsteonController(insteonGatewayHandler) {
    */
   async function setPort(req, res) {
     await insteonGatewayHandler.setPort(req.body.serialPort);
-    res.json('ok');
+    res.json({ success: true });
   }
 
   /**
@@ -54,7 +54,7 @@ module.exports = function InsteonController(insteonGatewayHandler) {
   }
 
   /**
-   * @api {get} /api/v1/service/insteon/getDevices Get all devices
+   * @api {get} /api/v1/service/insteon/devices Get all devices
    * @apiName getDevices
    * @apiGroup Insteon
    */
@@ -70,6 +70,16 @@ module.exports = function InsteonController(insteonGatewayHandler) {
    */
   async function getGateway(req, res) {
     res.json(insteonGatewayHandler.insteonGateway);
+  }
+
+  /**
+   * @api {get} /api/v1/service/insteon/getGateway Beep device
+   * @apiName Beep
+   * @apiGroup Insteon
+   */
+  async function beep(req, res) {
+    await insteonGatewayHandler.beep(req.body.externalId);
+    res.json({ success: true });
   }
 
   /**
@@ -136,6 +146,10 @@ module.exports = function InsteonController(insteonGatewayHandler) {
     'get /api/v1/service/insteon/light': {
       authenticated: true,
       controller: asyncMiddleware(getLights),
+    },
+    'post /api/v1/service/insteon/beep': {
+      authenticated: true,
+      controller: asyncMiddleware(beep),
     },
     'get /api/v1/service/insteon/scene': {
       authenticated: true,

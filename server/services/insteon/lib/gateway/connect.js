@@ -1,13 +1,9 @@
-const {
-  Insteon
-} = require('home-controller');
-const {
-  InsteonGateway
-} = require('../models/gateway');
+const { Insteon } = require('home-controller');
+const { InsteonGateway } = require('../models/gateway');
 
 /**
  * @description Return Philips hue bridges.
- * @param {String} portPath - Serial Port path.
+ * @param {string} portPath - Serial Port path.
  * @returns {Promise} Returns Promise.
  * @example
  * connect('COM1');
@@ -36,7 +32,6 @@ async function connect(portPath) {
 
     that.gw.serial(portPath);
   });
-
 }
 
 module.exports = {

@@ -12,10 +12,6 @@ class PhilipsHueDeviceForm extends Component {
     this.props.updateDeviceProperty(this.props.deviceIndex, 'room_id', e.target.value);
   };
 
-  updateExternalId = e => {
-    this.props.updateDeviceProperty(this.props.deviceIndex, 'external_id', e.target.value);
-  };
-
   render({ ...props }) {
     return (
       <div>
